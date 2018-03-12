@@ -13,10 +13,10 @@ const he = require('he');
 module.exports = (course, stepCallback) => {
     // this axillary function will clear the passed string and return only the text
     // it is done in 3 steps
-    function clearString(raw_string) {
+    function clearString(rawString) {
         // step 1 
         // get it back to html format
-        var clearedString1 = he.decode(raw_string);
+        var clearedString1 = he.decode(rawString);
 
         // step 2
         // clear everything like <...> (including the angular brackets)
