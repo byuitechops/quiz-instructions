@@ -20,6 +20,7 @@ module.exports = (course, stepCallback) => {
 
         // step 2
         // clear everything like <...> (including the angular brackets)
+        /* You could use the following code instead: clearedString1 = clearedString1.replace(/<[\s\S]*?.>/g, ''); */
         var clearedString2 = '';
         var add = true;
         for (var i = 0; i < clearedString1.length; i++) {
@@ -37,6 +38,13 @@ module.exports = (course, stepCallback) => {
         // step 3
         // the final refinement
         var wordsToRemove = ['&nbsp;', '&ldquo;', '&rdquo;'];
+        /* you could use the following code instead:
+            var regEx;
+            wordsToRemove.forEach(wordToRemove => {
+                regEx = new RegExp(wordToRemove, 'g'); // convert string to regular expression
+                clearedString1.replace(regEx, '');
+            });
+        */
         for (var k = 0; k < wordsToRemove.length; k++) {
             var remove = clearedString2.includes(wordsToRemove[k]);
             while (remove) {
