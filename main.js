@@ -20,49 +20,30 @@ module.exports = (course, stepCallback) => {
 
         // step 2
         // clear everything like <...> (including the angular brackets)
-        /* You could use the following code instead: clearedString1 = clearedString1.replace(/<[\s\S]*?.>/g, ''); */
-        var clearedString2 = '';
-        var add = true;
-        for (var i = 0; i < clearedString1.length; i++) {
-            if (clearedString1.charAt(i) === '<' && add === true) {
-                add = false;
-            }
-            if (clearedString1.charAt(i) === '>' && add === false) {
-                add = true;
-            }
-            if (add === true && clearedString1.charAt(i) !== '>') {
-                clearedString2 += clearedString1.charAt(i);
-            }
-        }
+        clearedString1 = clearedString1.replace(/<[\s\S]*?.>/g, '');
 
         // step 3
         // the final refinement
         var wordsToRemove = ['&nbsp;', '&ldquo;', '&rdquo;'];
-        /* you could use the following code instead:
-            var regEx;
-            wordsToRemove.forEach(wordToRemove => {
-                regEx = new RegExp(wordToRemove, 'g'); // convert string to regular expression
-                clearedString1.replace(regEx, '');
-            });
-        */
-        for (var k = 0; k < wordsToRemove.length; k++) {
-            var remove = clearedString2.includes(wordsToRemove[k]);
-            while (remove) {
-                clearedString2 = clearedString2.replace(wordsToRemove[k], '');
-                remove = clearedString2.includes(wordsToRemove[k]);
-            }
-        }
-        return clearedString2;
+
+        var regEx;
+        wordsToRemove.forEach(wordToRemove => {
+            regEx = new RegExp(wordToRemove, 'g'); // convert string to regular expression
+            clearedString1 = clearedString1.replace(regEx, '');
+        });
+
+        return clearedString1;
     }
 
     // this object will be filled with data for the log report
     var jsonReport = {};
     // We check 4 xml elements of each quiz file:
-    var name = ['Description:', 'Introduction:', 'Page Header:', 'Page Footer:'];
+    var name = ['Description', 'Introduction', 'Page Header', 'Page Footer'];
     var xml_tags = ['questestinterop>assessment>rubric>flow_mat>material>mattext',
         'd2l_2p0\\:intro_message',
         'material[label="page header"]>mattext',
-        'material[label="page footer"]>mattext'];
+        'material[label="page footer"]>mattext'
+    ];
 
     // all the job is done in this forEach()
     course.content.forEach(function (file) {
@@ -77,20 +58,20 @@ module.exports = (course, stepCallback) => {
 
             // fill up the quiz names for the module report
             var quizName = file.dom('assessment[d2l_2p0\\:id]').attr('title');
-            jsonReport['Quiz name: '] = quizName;
+            jsonReport['Quiz name'] = quizName;
 
             for (var i = 0; i < name.length; i++) {
                 var temp = he.encode('<h2 style="color:red;font-size: 24px;"><strong>Old ' +
                     name[i] + '</strong></h2>');
                 contentCollector += temp;
-                var new_information = name[i];
+                var newInformation = name[i];
                 // this line fishes out the needed tag and gets the text out of it
                 toCheckRaw = file.dom(xml_tags[i]).text();
                 if (toCheckRaw !== '') {
                     contentCollector += toCheckRaw;
                     toCheckCleared = clearString(toCheckRaw);
                     // fill up the Descriptions
-                    jsonReport[new_information] = toCheckCleared;
+                    jsonReport[newInformation] = toCheckCleared;
                 }
                 toCheckRaw = '';
                 toCheckCleared = '';
