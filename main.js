@@ -82,6 +82,9 @@ module.exports = (course, stepCallback) => {
             file.dom(xml_tags[0]).text(contentCollector, {
                 'useNamedReferences': true
             });
+            file.dom(xml_tags[1]).text('');
+            file.dom(xml_tags[2]).text('');
+            file.dom(xml_tags[3]).text('');
 
             /* Used to log successful actions */
             course.log('Descriptions for the quiz', jsonReport);
