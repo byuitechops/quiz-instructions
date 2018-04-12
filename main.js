@@ -7,9 +7,6 @@
 
 const he = require('he');
 
-/* View available course object functions */
-// https://github.com/byuitechops/d2l-to-canvas-conversion-tool/blob/master/documentation/classFunctions.md
-
 module.exports = (course, stepCallback) => {
     // this axillary function will clear the passed string and return only the text
     // it is done in 3 steps

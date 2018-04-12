@@ -8,15 +8,25 @@ This child module is built to be used by the Brigham Young University - Idaho D2
 
 ## Purpose
 
-Canvas has only Description, but d2l has quiz info in 4 places. The module locates all the different places the quiz instructions and descriptions are and put them all into the Description.  In the process of course import the Description will be ransfered from d2l to Canvas. 
+The module makes sure that descriprion and instructions for every quiz in the course will be trasfered from d2l to canvas.
 
 ## How to Install
 
-npm install quiz-instructions
+```
+Set CANVAS_API_TOKEN=10706~vXrrAZ24w3zWLqviu25tTkKjozI32IgqolFW4pVpcPiI81pFIkpkEHaynrc646km
+```
+```
+npm install set-syllabus
+```
+```
+npm start update
+```
 
 ## Run Requirements
 
-N/A
+course.content
+
+course.log
 
 ## Options
 
@@ -24,7 +34,8 @@ N/A
 
 ## Outputs
 
-N/A
+The course changed in putting contents from ['Description', 'Introduction', 'Page Header', 'Page Footer'] into the Description.
+The module does not add anything to `course.info` or anywhere else on the course object.
 
 ## Process
 
@@ -34,10 +45,9 @@ N/A
 
 ## Log Categories
 
-/* Used to log successful actions */
-
 course.log('Descriptions for the quiz', jsonReport);
 
 ## Requirements
 
-The module returns the course with the updated Description for each quiz
+Canvas has only Description, but d2l has quiz info in 4 places:['Description', 'Introduction', 'Page Header', 'Page Footer']. The module locates all the different places the quiz instructions and descriptions are and put them all into the Description.  In the process of course import the Description will be ransfered from d2l to Canvas. 
+The module returns the course with the updated Description for each quiz.
