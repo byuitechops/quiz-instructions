@@ -60,11 +60,11 @@ module.exports = (course, stepCallback) => {
             for (var i = 0; i < name.length; i++) {
                 var temp = he.encode('<h2 style="color:red;font-size: 24px;"><strong>Old ' +
                     name[i] + '</strong></h2>');
-                contentCollector += temp;
                 var newInformation = name[i];
                 // this line fishes out the needed tag and gets the text out of it
                 toCheckRaw = file.dom(xml_tags[i]).text();
                 if (toCheckRaw !== '') {
+                    contentCollector += temp;
                     contentCollector += toCheckRaw;
                     toCheckCleared = clearString(toCheckRaw);
                     // fill up the Descriptions
