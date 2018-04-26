@@ -20,7 +20,7 @@
         "type": "git",
         "url": "git+https://github.com/byuitechops/quiz-instructions.git"
     },
-    "author": "Zachary Williams, Daniel Green",
+    "author": "Yura Vasiuk, Zachary Williams, Daniel Green",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/byuitechops/quiz-instructions/issues"
